@@ -4,6 +4,7 @@
    ============================================== */
 
 .dashboard {
+    width: 100%;
     max-width: var(--max-content-width);
     margin: 0 auto;
     padding: var(--sp-8) var(--sp-16);
@@ -98,6 +99,8 @@
     position: relative;
     z-index: 2;
     overflow: hidden;
+    min-width: 0;
+    max-width: 100%;
     /* Transparent background allowing the LiquidGlass to render over the pseudo-background */
     background: transparent;
     border-radius: var(--radius-full);
@@ -495,13 +498,12 @@
 
 @media (max-width: 768px) {
     .dashboard {
-        padding: var(--sp-12);
-        gap: var(--sp-12);
-        height: auto;
-        min-height: calc(100vh - var(--header-height));
-        overflow: visible;
-        padding-bottom: 80px;
-        /* Space for FAB */
+        padding: var(--sp-8);
+        gap: var(--sp-8);
+        height: calc(100vh - var(--header-height));
+        overflow: hidden;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     /* Mobile Specific Overrides */
@@ -511,49 +513,58 @@
 
     .dashboard__status-bar {
         flex-direction: column;
-        gap: var(--sp-8);
-        align-items: flex-start;
-        padding: var(--sp-12);
+        gap: var(--sp-6);
+        align-items: stretch;
+        padding: var(--sp-8);
         width: 100%;
+        box-sizing: border-box;
+        flex-shrink: 0;
     }
 
     .dashboard__ticker-wrap {
         width: 100%;
         margin-right: 0;
+        min-width: 0;
     }
 
     .dashboard__ticker {
-        font-size: 13px;
+        font-size: 11px;
     }
 
     .dashboard__split {
         grid-template-columns: 1fr;
-        gap: var(--sp-12);
+        gap: var(--sp-8);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        flex: 1;
+        min-height: 0;
+    }
+
+    .dashboard__map-panel {
+        flex: 1;
+        min-height: 0;
+        height: auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    .dashboard__info-panel {
+        flex: 1;
+        min-height: 0;
+        height: auto;
+        max-height: none;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: var(--radius-lg);
         display: flex;
         flex-direction: column;
     }
 
-    .dashboard__map-panel {
-        min-height: 280px;
-        height: 45vh;
-        position: relative;
-        z-index: 1;
-        /* Kept natural card styling instead of full bleed edges */
-    }
-
-    .dashboard__info-panel {
-        max-height: none;
-        /* Remove scroll constraint */
-        min-height: auto;
-        overflow: visible;
-        box-shadow: none;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: var(--radius-lg);
-    }
-
     .dashboard__tab-content {
-        max-height: 500px;
-        /* Cap it a bit but allow scroll */
+        flex: 1;
+        overflow-y: auto;
+        max-height: none;
     }
 
     .dashboard__fab {
@@ -562,11 +573,6 @@
 }
 
 @media (max-width: 480px) {
-    .dashboard__map-panel {
-        min-height: 250px;
-        height: 35vh;
-    }
-
     .dashboard__status-text {
         font-size: 10px;
     }

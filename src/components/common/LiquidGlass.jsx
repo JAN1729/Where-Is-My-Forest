@@ -135,7 +135,8 @@ const GlassContainer = forwardRef(({
                         position: "relative",
                         zIndex: 1,
                         textShadow: overLight ? "0px 2px 12px rgba(0, 0, 0, 0)" : "0px 2px 12px rgba(0, 0, 0, 0.4)",
-                        width: '100%'
+                        width: '100%',
+                        minWidth: 0
                     }}
                 >
                     {children}
