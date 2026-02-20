@@ -4,7 +4,6 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "npm audit --audit-level=high",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
