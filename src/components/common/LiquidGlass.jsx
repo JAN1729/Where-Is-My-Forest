@@ -106,7 +106,7 @@ const GlassContainer = forwardRef(({
                 style={{
                     borderRadius: `${cornerRadius}px`,
                     position: "relative",
-                    display: "inline-flex",
+                    display: "flex", /* Switched from inline-flex to flex */
                     alignItems: "center",
                     gap: "24px",
                     padding,
