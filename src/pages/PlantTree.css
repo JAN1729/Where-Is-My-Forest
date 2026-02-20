@@ -559,8 +559,15 @@
         padding: 24px 16px;
     }
 
+    .plant-tree__btn {
+        width: 100%;
+        justify-content: center;
+    }
+
     /* Sticky Navigation */
     .plant-tree__nav {
+        flex-direction: column-reverse;
+        gap: var(--sp-12);
         position: sticky;
         bottom: 0;
         background: var(--white, #fff);
@@ -572,6 +579,10 @@
         padding-bottom: calc(16px + env(safe-area-inset-bottom));
         box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
         /* shadow for depth */
+    }
+
+    .plant-tree__nav-spacer {
+        display: none;
     }
 }
 

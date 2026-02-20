@@ -171,10 +171,11 @@
     background: rgba(255, 255, 255, 0.7);
     border-radius: 2px;
     transition: all var(--duration-normal) var(--ease-out);
+    transform-origin: center;
 }
 
 .header__hamburger--open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: translateY(7px) rotate(45deg);
 }
 
 .header__hamburger--open span:nth-child(2) {
@@ -182,7 +183,7 @@
 }
 
 .header__hamburger--open span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Mobile drawer overlay */
@@ -298,5 +299,19 @@
 
     .header__logo-sub {
         display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .header__logo-title {
+        font-size: var(--fs-base);
+    }
+    .header__logo-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+    .header__inner {
+        padding: 0 var(--sp-12);
+        gap: var(--sp-12);
     }
 }

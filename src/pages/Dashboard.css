@@ -514,6 +514,16 @@
         gap: var(--sp-8);
         align-items: flex-start;
         padding: var(--sp-12);
+        width: 100%;
+    }
+
+    .dashboard__ticker-wrap {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .dashboard__ticker {
+        font-size: 13px;
     }
 
     .dashboard__split {
@@ -525,7 +535,7 @@
 
     .dashboard__map-panel {
         min-height: 280px;
-        height: 38vh;
+        height: 45vh;
         position: relative;
         z-index: 1;
         /* Kept natural card styling instead of full bleed edges */
