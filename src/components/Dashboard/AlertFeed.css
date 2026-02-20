@@ -1,0 +1,128 @@
+/* ==============================================
+   Alert Feed Sidebar — Premium Design
+   ============================================== */
+
+.alert-feed__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    z-index: 900;
+}
+
+.alert-feed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 360px;
+    max-width: 90vw;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.12);
+    z-index: 950;
+    display: flex;
+    flex-direction: column;
+}
+
+.alert-feed__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-20) var(--sp-24);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+    background: var(--cream-soft);
+}
+
+.alert-feed__title {
+    font-size: var(--fs-md);
+    font-weight: var(--fw-bold);
+    color: var(--black);
+}
+
+.alert-feed__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-full);
+    color: var(--black-muted);
+    transition: all var(--duration-fast);
+}
+
+.alert-feed__close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: var(--black);
+}
+
+.alert-feed__list {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--sp-12);
+}
+
+.alert-feed__empty {
+    text-align: center;
+    padding: var(--sp-48);
+    color: var(--black-faint);
+    font-size: var(--fs-sm);
+}
+
+.alert-feed__item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-12);
+    padding: var(--sp-12);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    border: 1px solid transparent;
+}
+
+.alert-feed__item:hover {
+    background: var(--cream);
+    border-color: var(--cream-border);
+}
+
+.alert-feed__item-bar {
+    width: 3px;
+    height: 32px;
+    border-radius: 2px;
+    background: var(--severity-color);
+    flex-shrink: 0;
+}
+
+.alert-feed__item-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.alert-feed__item-type {
+    display: block;
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    color: var(--black);
+}
+
+.alert-feed__item-location {
+    display: block;
+    font-size: var(--fs-xs);
+    color: var(--black-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.alert-feed__item-time {
+    font-size: 10px;
+    color: var(--black-faint);
+}
+
+@media (max-width: 480px) {
+    .alert-feed {
+        width: 100%;
+    }
+}

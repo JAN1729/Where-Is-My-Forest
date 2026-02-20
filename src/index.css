@@ -1,0 +1,380 @@
+/* ==============================================
+   WHERE IS MY FOREST — Premium Design System
+   Inspired by Bloomberg Terminal + Modern Dashboards
+   ============================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* =============================================
+   Design Tokens
+   ============================================= */
+:root {
+  /* Core Palette */
+  --cream: #FFF8F0;
+  --cream-soft: #FDF5EC;
+  --cream-dark: #F0E6DA;
+  --cream-border: #E8DDD0;
+
+  --forest: #2D6A4F;
+  --forest-dark: #1B4332;
+  --forest-deeper: #143026;
+  --forest-light: #40916C;
+  --forest-lighter: #52B788;
+  --forest-pale: #B7E4C7;
+  --forest-glow: rgba(45, 106, 79, 0.12);
+
+  --black: #1A1A1A;
+  --black-soft: #333;
+  --black-muted: #777;
+  --black-faint: #AAA;
+  --white: #FFFFFF;
+
+  --alert-red: #C1121F;
+  --alert-red-soft: rgba(193, 18, 31, 0.08);
+  --fire-orange: #D6472B;
+  --fire-orange-soft: rgba(214, 71, 43, 0.08);
+  --warning-amber: #D4A017;
+
+  /* Gradients */
+  --gradient-forest: linear-gradient(135deg, #1B4332 0%, #2D6A4F 50%, #40916C 100%);
+  --gradient-hero: linear-gradient(135deg, #143026 0%, #1B4332 40%, #2D6A4F 100%);
+  --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 248, 240, 0.9) 100%);
+  --gradient-glow: radial-gradient(ellipse at 50% 0%, rgba(82, 183, 136, 0.15) 0%, transparent 60%);
+
+  /* Spacing (8dp grid) */
+  --sp-2: 2px;
+  --sp-4: 4px;
+  --sp-6: 6px;
+  --sp-8: 8px;
+  --sp-12: 12px;
+  --sp-16: 16px;
+  --sp-20: 20px;
+  --sp-24: 24px;
+  --sp-32: 32px;
+  --sp-40: 40px;
+  --sp-48: 48px;
+  --sp-56: 56px;
+  --sp-64: 64px;
+
+  /* Typography */
+  --font: 'Outfit', system-ui, -apple-system, sans-serif;
+  --fs-xs: 0.7rem;
+  --fs-sm: 0.8rem;
+  --fs-base: 0.925rem;
+  --fs-md: 1.05rem;
+  --fs-lg: 1.2rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 1.85rem;
+  --fs-3xl: 2.4rem;
+  --fs-4xl: 3rem;
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+
+  /* Borders & Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 48px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 40px rgba(45, 106, 79, 0.1);
+  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  /* Animation */
+  --duration-fast: 0.15s;
+  --duration-normal: 0.25s;
+  --duration-slow: 0.4s;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout */
+  --header-height: 64px;
+  --max-content-width: 1440px;
+  --sidebar-width: 380px;
+}
+
+/* =============================================
+   Reset & Base
+   ============================================= */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  color: var(--black);
+  background: var(--cream);
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* =============================================
+   Card Styles — Premium Look
+   ============================================= */
+.solid-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+
+.solid-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: var(--shadow-md);
+}
+
+.dark-card {
+  background: var(--gradient-hero);
+  color: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* =============================================
+   Badge System
+   ============================================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp-2) var(--sp-8);
+  border-radius: var(--radius-full);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+}
+
+.badge--green {
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--forest);
+}
+
+.badge--red {
+  background: var(--alert-red-soft);
+  color: var(--alert-red);
+}
+
+.badge--orange {
+  background: var(--fire-orange-soft);
+  color: var(--fire-orange);
+}
+
+.badge--neutral {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--black-muted);
+}
+
+/* =============================================
+   Scrollbar
+   ============================================= */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================
+   Animations
+   ============================================= */
+@keyframes pulse-alert {
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(45, 106, 79, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 0 8px rgba(45, 106, 79, 0);
+  }
+}
+
+/* =============================================
+   Leaflet Overrides
+   ============================================= */
+.leaflet-container {
+  font-family: var(--font) !important;
+  border-radius: var(--radius-lg);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  padding: var(--sp-12) var(--sp-16) !important;
+  font-size: var(--fs-sm) !important;
+  line-height: 1.5 !important;
+}
+
+.leaflet-popup-tip {
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.leaflet-control-attribution {
+  font-size: 9px !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: var(--radius-sm) 0 0 0 !important;
+}
+
+/* Custom marker animation */
+.custom-marker {
+  animation: glow-pulse 2s infinite;
+}
+
+/* =============================================
+   Utility Classes
+   ============================================= */
+.section-title {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-bold);
+  color: var(--black);
+  letter-spacing: -0.01em;
+}
+
+.section-subtitle {
+  font-size: var(--fs-sm);
+  color: var(--black-muted);
+  margin-top: var(--sp-4);
+}
+
+.loading-skeleton {
+  background: linear-gradient(90deg, var(--cream-soft) 25%, var(--cream-dark) 50%, var(--cream-soft) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* =============================================
+   Mobile Overrides & Global Utilities
+   ============================================= */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  /* Prevents auto-zoom on iOS when tapping inputs/selects */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+.safe-padding-bottom {
+  padding-bottom: calc(var(--sp-16) + env(safe-area-inset-bottom));
+}
