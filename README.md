@@ -1,84 +1,96 @@
 <div align="center">
-  <img src="public/logo.png" alt="Where Is My Forest Logo" width="120" />
+  
   <h1>Where Is My Forest 🌲</h1>
-  <p><strong>A Real-Time Deforestation Tracking & Community Reforestation Platform for India</strong></p>
+  <p><strong>A Real-Time Deforestation Tracking & Community Reforestation Platform for Conseration Developers.</strong></p>
+
+  <p>
+    <a href="https://reactjs.org/"><img src="https://img.shields.io/badge/React-19-blue.svg?style=flat&logo=react" alt="React" /></a>
+    <a href="https://supabase.com/"><img src="https://img.shields.io/badge/Supabase-Backend_as_a_Service-3ECF8E.svg?style=flat&logo=supabase" alt="Supabase" /></a>
+    <a href="https://tailwindcss.com/"><img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC.svg?style=flat&logo=tailwind-css" alt="Tailwind CSS" /></a>
+    <a href="https://vitejs.dev/"><img src="https://img.shields.io/badge/Vite-Fast_Build_Tool-646CFF.svg?style=flat&logo=vite" alt="Vite" /></a>
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT" /></a>
+    <a href="https://github.com/YourUsername/WhereIsMyForest/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-brightgreen.svg" alt="PRs Welcome" /></a>
+  </p>
 </div>
 
 <br />
 
-**Where Is My Forest** is an open-source platform designed to bring transparency to India's forest cover, track environmental incidents in real-time, and encourage community-driven reforestation through AI-verified tree planting.
+**Where Is My Forest** is an open-source platform built by and for environmental conservation developers. Our goal is to bring radical transparency to forest cover data, track environmental incidents in real-time, and encourage community-driven reforestation using AI-verified tracking.
 
-## ✨ Features
+If you are a developer passionate about climate tech, GIS, or open-source, we need your help to build the ultimate tool for forest conservation.
 
-- 🗺️ **Interactive Geographic Tracking:** View state-wise forest data (ISFR statistics), protected areas, and live incident heatmaps using Leaflet.
-- 🚨 **Live Incident Reporting:** Community-submitted reports for illegal logging, forest fires, wildlife poaching, and pollution.
-- 🌱 **AI-Verified Reforestation:** Users can upload photos of newly planted trees, which are validated in real-time by a multimodal AI model (via OpenRouter) before being added to the public map.
-- 📰 **Real-Time Environmental News:** Curated, AI-summarized news feed regarding forest policy, conservation, and deforestation trends.
-- 🔒 **Secure by Design:** Built with strict Supabase Row Level Security (RLS), IP-based rate limiting on edge functions, and payload validation.
+## ✨ Why Contribute to This Project?
 
-## 🛠️ Technology Stack
+We are building a robust, modern stack that tackles real-world environmental problems:
+- 🗺️ **Interactive Geographic Tracking:** Visualizing state-wise forest data and live incident heatmaps using `Leaflet`.
+- 🚨 **Live Incident Reporting:** A crowdsourced platform for illegal logging, forest fires, wildlife poaching, and pollution.
+- 🌱 **AI-Verified Reforestation:** Multi-modal AI validation (via OpenRouter & Gemini) of community-planted trees.
+- 📰 **Real-Time Data Pipelines:** Edge functions orchestrating pipelines from Global Forest Watch (GFW), NASA FIRMS, and NewsData.io.
 
-- **Frontend:** React 19, Vite, Tailwind CSS, Framer Motion, Recharts, React Leaflet
-- **Backend (BaaS):** Supabase (PostgreSQL, Realtime, Storage, Edge Functions)
-- **AI Integration:** OpenRouter (Gemini 2.0 Flash) for image verification
-- **Integrations:** GFW (Global Forest Watch), NASA FIRMS (via Edge Functions/Cron)
+---
 
-## 🚀 Getting Started
+## 🏗️ System Architecture
 
-### Prerequisites
-- Node.js (v18+)
-- A [Supabase](https://supabase.com) account
-- An [OpenRouter](https://openrouter.ai) API key
+Our platform follows a modern, decoupled architecture designed for scale and rapid contribution:
 
-### Local Development Setup
+- **Frontend (Client):** `React 19` + `Vite` for ultra-fast HMR and building. Styling powered by `Tailwind CSS`, animations by `Framer Motion`, and charts by `Recharts`.
+- **Backend (BaaS):** `Supabase` is the core of our data layer.
+  - **Database:** PostgreSQL with strict Row Level Security (RLS).
+  - **Realtime:** Subscriptions for live incident updates.
+  - **Storage:** Secure buckets for tree photo uploads.
+  - **Edge Functions:** Deno-based serverless functions for fetching satellite data and running AI validations.
+- **External Integrations:** OpenRouter API (AI image validation), NASA FIRMS (Active Fire Data).
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/YourUsername/WhereIsMyForest.git
-   cd WhereIsMyForest
-   ```
+---
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+## 🚀 Idiot-Proof Local Setup
 
-3. **Configure Environment Variables:**
-   Create a `.env` file in the root directory:
-   ```env
-   VITE_SUPABASE_URL=your_supabase_project_url
-   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
+We've made it extremely easy to get this running locally. Follow these steps to spin up your environment in under 5 minutes.
 
-4. **Initialize Supabase Database:**
-   - Go to your Supabase Dashboard -> **SQL Editor**.
-   - Copy the contents of `supabase/schema.sql` and run it to create the tables, RLS policies, storage buckets, and seed data.
+### 1. Prerequisites
+- [Node.js](https://nodejs.org/) (v18+)
+- A free [Supabase](https://supabase.com) account
+- A free [OpenRouter](https://openrouter.ai) API key (for the AI verification feature)
 
-5. **Deploy Supabase Edge Functions:**
-   First, set your OpenRouter secret in Supabase:
-   ```bash
-   npx supabase secrets set OPENROUTER_API_KEY=your_openrouter_key
-   ```
-   Then deploy the verification function:
-   ```bash
-   npx supabase functions deploy verify-tree-photo --no-verify-jwt
-   ```
+### 2. Clone and Install
+```bash
+git clone https://github.com/YourUsername/WhereIsMyForest.git
+cd WhereIsMyForest
+npm install
+```
 
-6. **Run the Development Server:**
-   ```bash
-   npm run dev
-   ```
-   The app will be available at `http://localhost:5173`.
+### 3. Environment Variables
+Copy the example environment file and fill in your Supabase credentials:
+```bash
+cp .env.example .env
+```
+Update `.env` with your Supabase URL and Anon Key (found in your Supabase project settings -> API).
+
+### 4. Database Setup
+1. Open your Supabase Dashboard and navigate to the **SQL Editor**.
+2. Copy the entire contents of `supabase/schema.sql` and run it. This script is idempotent and will automatically create all tables, RLS policies, storage buckets, and seed data.
+
+### 5. Start Hacking!
+```bash
+npm run dev
+```
+The application will be running at `http://localhost:5173`.
+
+---
 
 ## 🤝 Contributing
 
-Contributions are welcome! If you're passionate about the environment and open-source software, feel free to open an issue or submit a pull request.
+We welcome all conservation-minded developers! Whether it's fixing a bug, adding a new GIS layer, or optimizing our queries, your contributions matter.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+Read our [Contributing Guidelines](CONTRIBUTING.md) to understand our workflow, branch naming conventions, and how to submit a stellar Pull Request.
+
+---
+
+## 🐞 Found a Bug or Have an Idea?
+
+- **Bugs:** Please open an issue using our [Bug Report Template](.github/ISSUE_TEMPLATE/bug_report.md).
+- **Features:** Have an idea for a new data integration? Open a [Feature Request](.github/ISSUE_TEMPLATE/feature_request.md).
 
 ## 📄 License
-This project is open-source and available under the MIT License.
+
+This project is open-source under the [MIT License](LICENSE). Build something beautiful and save the forests.

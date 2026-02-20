@@ -72,6 +72,10 @@ export default function Report() {
         location_name: '', reporter_name: '', reporter_org: '', reporter_contact: '',
     });
 
+    // DEVELOPER NOTE: Responsive Form Wizard Pattern
+    // On Desktop (!isMobile), all form sections are rendered at once to allow quick data entry.
+    // On Mobile, we constrain the view to a single 'formStep' index to prevent overwhelming 
+    // vertical scrolling and present the form as a step-by-step wizard.
     const showSection = (index) => !isMobile || formStep === index;
     const canProceedToDetails = form.latitude !== null && form.longitude !== null && form.state !== '';
     const canProceedToInfo = form.title !== '' && form.category !== '' && form.severity !== '';

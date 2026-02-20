@@ -66,6 +66,9 @@ export default function PlantTree() {
     }, []);
 
     // Auto-detect GPS
+    // DEVELOPER NOTE: We request High Accuracy GPS. Browser location APIs sometimes
+    // fall back to IP-based location on desktop, which can be inaccurate by miles.
+    // Ensure you test this on an actual mobile device with GPS sensors for accurate pins.
     const detectGPS = useCallback(() => {
         if (!navigator.geolocation) {
             setError('Geolocation is not supported by your browser');
@@ -132,10 +135,15 @@ export default function PlantTree() {
         setError('');
 
         try {
-            // 1. Upload compressed photo
+            // DEVELOPER NOTE: Architecture Flow for Tree Submission
+            // 1. Upload compressed photo to Supabase Storage Bucket ('tree-photos')
+            //    This bucket has public read access but anon insert requires RLS policy.
             const photoUrl = await uploadTreePhoto(photoFile);
 
-            // 2. Submit tree record + trigger AI verification
+            // 2. Submit tree record to the database
+            //    Supabase Postgres trigger or Edge Function will pick this up
+            //    and pass the photoUrl to OpenRouter (Gemini) for AI verification.
+            //    The status remains 'pending' until the AI confirms it's a real tree.
             await submitPlantedTree({
                 planterName: name.trim(),
                 plantedDate,

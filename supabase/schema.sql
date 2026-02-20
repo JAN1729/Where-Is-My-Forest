@@ -91,6 +91,10 @@ CREATE INDEX IF NOT EXISTS idx_news_category ON public.news_articles(category);
 -- =============================================
 -- Row Level Security — enable read for everyone
 -- =============================================
+-- Developer Note: RLS (Row Level Security) is Supabase's mechanism for 
+-- restricting database access. Because this is primarily an open-data 
+-- conservation project, SELECT (read) operations are public by default.
+-- =============================================
 ALTER TABLE public.forest_stats ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.forest_alerts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.news_articles ENABLE ROW LEVEL SECURITY;
@@ -134,6 +138,12 @@ END $$;
 -- Cron job: refresh data every 30 minutes
 -- (Calls our Edge Functions via pg_net)
 -- =============================================
+-- Developer Note: Supabase provides the `pg_cron` extension for background tasks.
+-- In production, you would uncomment this to periodically trigger the Edge 
+-- Functions. The functions will then fetch external API data (NASA/GFW) and 
+-- upsert it into the tables. Do not run this locally unless you are actively 
+-- testing the Edge Functions.
+--
 -- NOTE: Replace YOUR_PROJECT_REF and YOUR_ANON_KEY below
 -- SELECT cron.schedule(
 --   'refresh-forest-alerts',
@@ -236,6 +246,10 @@ CREATE POLICY "Public read protected_areas" ON public.protected_areas FOR SELECT
 CREATE POLICY "Public read resource_directory" ON public.resource_directory FOR SELECT USING (true);
 
 -- Insert policies (Anon users can only insert, not update/delete)
+-- Developer Note: We allow anonymous users to insert incidents to lower 
+-- the barrier to reporting environmental issues. However, strict CHECK 
+-- constraints (e.g., status = 'pending') ensure all reports go into an 
+-- approval queue and aren't immediately shown on the public map.
 DROP POLICY IF EXISTS "Public insert incidents" ON public.incidents;
 DROP POLICY IF EXISTS "Public insert planted_trees" ON public.planted_trees;
 
